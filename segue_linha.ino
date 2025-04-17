@@ -1,69 +1,65 @@
 // sensores reflexivos
-#define SENSORD 13
-#define SENSORM 12
-#define SENSORE 11
+#define SENSORD 5
+#define SENSORM 6
+#define SENSORE 7
 
 // motores
-#define MOTORD 6
-#define MOTORE 5
+#define MOTORDF 3
+#define MOTORDT 10
+#define MONTOREF 11
+#define MOTORET 9
+
 void setup() {
   pinMode(SENSORD, INPUT);
   pinMode(SENSORM, INPUT);
   pinMode(SENSORE, INPUT);
 
-  //pinMode(MOTORD, OUTPUT);
-  //pinMode(MOTORE, OUTPUT);
   pinMode(MOTORD, OUTPUT);
   pinMode(MOTORE, OUTPUT);
 
-  digitalWrite(MOTORD, LOW);
-  digitalWrite(MOTORE, LOW);
-
-  
+  analogWrite(MOTORD, 0);
+  analogWrite(MOTORE, 0);
 }
 
-void loop() {
+void loop()
+{
+
  bool estadoSD = digitalRead(SENSORD);
  bool estadoSM = digitalRead(SENSORM);
  bool estadoSE = digitalRead(SENSORE);
 
+ // curva para esquerda
  if (estadoSD && !estadoSE)
  {
-    //analogWrite(MOTORD, 30);
+    analogWrite(MOTORD, 110);
+    
     if (estadoSM)
      {
-        //analogWrite(MOTORE, 90);
-        digitalWrite(MOTORE, HIGH);
-        digitalWrite(MOTORD, LOW);
+        analogWrite(MOTORE, 180);
      }
      else
      {
-        //analogWrite(MOTORE, 120);
-        digitalWrite(MOTORE, HIGH);
-        digitalWrite(MOTORD, LOW);
+        analogWrite(MOTORE, 200);
      }
  }
+ // curva para direita
  else if (!estadoSD && estadoSE)
  {
-    //analogWrite(MOTORD, 30);
+    analogWrite(MOTORD, 110);
+    
     if (estadoSM)
      {
-        //analogWrite(MOTORD, 90);
-        digitalWrite(MOTORD, HIGH);
-        digitalWrite(MOTORE, LOW);
+        analogWrite(MOTORD, 180);
      }
      else
      {
-        //analogWrite(MOTORD, 120);
-        digitalWrite(MOTORD, HIGH);
-        digitalWrite(MOTORE, LOW);
+        analogWrite(MOTORD, 200);
      }
  }
+ // segue reto
  else
  {
-    //analogWrite(MOTORD, 90);
-    //analogWrite(MOTORE, 90);
-    digitalWrite(MOTORD, HIGH);
-    digitalWrite(MOTORE, HIGH);
+    analogWrite(MOTORD, 150);
+    analogWrite(MOTORE, 150);
  }
 }
