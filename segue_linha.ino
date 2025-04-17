@@ -5,8 +5,8 @@
 
 // motores
 #define MOTORDF 3
-#define MOTORDT 10
-#define MONTOREF 11
+#define MOTORDT 11
+#define MOTOREF 10
 #define MOTORET 9
 
 void setup() {
@@ -14,11 +14,15 @@ void setup() {
   pinMode(SENSORM, INPUT);
   pinMode(SENSORE, INPUT);
 
-  pinMode(MOTORD, OUTPUT);
-  pinMode(MOTORE, OUTPUT);
+  pinMode(MOTORDF, OUTPUT);
+  pinMode(MOTORDT, OUTPUT);
+  pinMode(MOTOREF, OUTPUT);
+  pinMode(MOTORET, OUTPUT);
 
-  analogWrite(MOTORD, 0);
-  analogWrite(MOTORE, 0);
+  analogWrite(MOTORDF, 0);
+  analogWrite(MOTOREF, 0);
+  analogWrite(MOTORDT, 0);
+  analogWrite(MOTORET, 0);
 }
 
 void loop()
@@ -31,35 +35,35 @@ void loop()
  // curva para esquerda
  if (estadoSD && !estadoSE)
  {
-    analogWrite(MOTORD, 110);
+    analogWrite(MOTOREF, 255);
+    analogWrite(MOTORET, 0);
+    analogWrite(MOTORDF, 50);
+    analogWrite(MOTORDT, 0);
     
     if (estadoSM)
      {
-        analogWrite(MOTORE, 180);
-     }
-     else
-     {
-        analogWrite(MOTORE, 200);
+        analogWrite(MOTORDF, 0);
      }
  }
  // curva para direita
  else if (!estadoSD && estadoSE)
  {
-    analogWrite(MOTORD, 110);
+    analogWrite(MOTORDF, 255);
+    analogWrite(MOTORDT, 0);
+    analogWrite(MOTOREF, 50);
+    analogWrite(MOTORET, 0);
     
     if (estadoSM)
      {
-        analogWrite(MOTORD, 180);
-     }
-     else
-     {
-        analogWrite(MOTORD, 200);
+        analogWrite(MOTOREF, 0);
      }
  }
  // segue reto
  else
  {
-    analogWrite(MOTORD, 150);
-    analogWrite(MOTORE, 150);
+    analogWrite(MOTORDF, 150);
+    analogWrite(MOTOREF, 150);
+    analogWrite(MOTORDT, 0);
+    analogWrite(MOTORET, 0);
  }
 }
