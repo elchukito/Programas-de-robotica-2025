@@ -59,14 +59,14 @@ void loop()
       }
    }
    // segue reto
-   else if (!estadoSD && !estadoSE)
+   else if (!estadoSD && !estadoSE && estadoSM)
    {
       analogWrite(MOTORDF, 150);
       analogWrite(MOTOREF, 150);
       analogWrite(MOTORDT, 0);
       analogWrite(MOTORET, 0);
    }
-   else
+   else if (!estadoSD && !estadoSE && !estadoSM)
    {
       analogWrite(MOTORDF, 0);
       analogWrite(MOTOREF, 0);
