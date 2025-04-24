@@ -37,7 +37,7 @@ void loop()
    {
       analogWrite(MOTOREF, 255);
       analogWrite(MOTORET, 0);
-      analogWrite(MOTORDF, 50);
+      analogWrite(MOTORDF, 0);
       analogWrite(MOTORDT, 0);
 
       if (estadoSM)
@@ -50,7 +50,7 @@ void loop()
    {
       analogWrite(MOTORDF, 255);
       analogWrite(MOTORDT, 0);
-      analogWrite(MOTOREF, 50);
+      analogWrite(MOTOREF, 0);
       analogWrite(MOTORET, 0);
 
       if (estadoSM)
@@ -59,10 +59,17 @@ void loop()
       }
    }
    // segue reto
-   else
+   else if (!estadoSD && !estadoSE)
    {
       analogWrite(MOTORDF, 150);
       analogWrite(MOTOREF, 150);
+      analogWrite(MOTORDT, 0);
+      analogWrite(MOTORET, 0);
+   }
+   else
+   {
+      analogWrite(MOTORDF, 0);
+      analogWrite(MOTOREF, 0);
       analogWrite(MOTORDT, 0);
       analogWrite(MOTORET, 0);
    }
